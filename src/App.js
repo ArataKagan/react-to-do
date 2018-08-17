@@ -35,8 +35,13 @@ class App extends Component {
     const todo = todos[index];
     // revisit the structure of ternery function
     todo.isCompleted = todo.isCompleted ? false : true;
-    // revisit why todos: todos
     this.setState({ todos: todos });
+  }
+
+  deleteTodo(index){　　
+    const todos = this.state.todos.slice();
+    const todo = todos[index];
+    this.setState({ todos : this.state.todos.filter(item => item !== todo) });
   }
 
 
@@ -47,7 +52,7 @@ class App extends Component {
           { this.state.todos.map( (todo, index) =>
               // Pass anonymous function to toggleComplete
               // Index allows us to select appropriate todo
-              <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+              <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index)} deleteTodo={ () => this.deleteTodo(index)}/>
           )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
